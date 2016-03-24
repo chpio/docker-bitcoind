@@ -3,11 +3,11 @@ FROM chpio/gosu:jessie
 RUN { \
 	set -ex; \
 
-	BITCOIN_VERSION="0.12.0"; \
+	BITCOIND_VERSION="0.12.0"; \
 
 	# add user & group
-	groupadd --system --gid 1000 bitcoin; \
-	useradd --system --uid 1000 --gid 1000 bitcoin; \
+	groupadd --system --gid 1000 bitcoind; \
+	useradd --system --uid 1000 --gid 1000 bitcoind; \
 
 	BUILD_DEPS="wget ca-certificates"; \
 	apt-get update; \
@@ -15,13 +15,13 @@ RUN { \
 
 	# download
 	wget \
-		"https://bitcoin.org/bin/bitcoin-core-${BITCOIN_VERSION}/bitcoin-${BITCOIN_VERSION}-linux64.tar.gz" \
-		--output-document="bitcoin.tar.gz"; \
+		"https://bitcoin.org/bin/bitcoin-core-${BITCOIND_VERSION}/bitcoin-${BITCOIND_VERSION}-linux64.tar.gz" \
+		--output-document="bitcoind.tar.gz"; \
 
 	# install
-	tar -xzf bitcoin.tar.gz; \
-	mv bitcoin-${BITCOIN_VERSION}/lib/* /usr/lib; \
-	mv bitcoin-${BITCOIN_VERSION}/bin/bitcoind /usr/bin; \
+	tar -xzf bitcoind.tar.gz; \
+	mv bitcoin-${BITCOIND_VERSION}/lib/* /usr/lib; \
+	mv bitcoin-${BITCOIND_VERSION}/bin/bitcoind /usr/bin; \
 
 	# clean up
 	apt-get purge -y $BUILD_DEPS; \
@@ -29,9 +29,9 @@ RUN { \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*; \
 }
 
-VOLUME /data/bitcoin
+VOLUME /data/bitcoind
 
-COPY bitcoin.conf /etc/
+COPY bitcoind.conf /etc/
 
-COPY start-bitcoin /usr/bin/
-ENTRYPOINT ["start-bitcoin"]
+COPY start-bitcoind /usr/bin/
+ENTRYPOINT ["start-bitcoind"]

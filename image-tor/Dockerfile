@@ -1,3 +1,3 @@
 FROM chpio/bitcoind:latest
 
-COPY bitcoin.conf /etc/
+COPY bitcoind.conf /etc/

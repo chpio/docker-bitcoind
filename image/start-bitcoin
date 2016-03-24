@@ -1,5 +1,0 @@
-#!/bin/sh -ex
-
-chown bitcoin:bitcoin -R /data/bitcoin
-
-exec gosu bitcoin:bitcoin bitcoind -datadir=/data/bitcoin -conf=/etc/bitcoin.conf $@
