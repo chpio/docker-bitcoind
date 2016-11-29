@@ -15,7 +15,7 @@ RUN { \
 
 	# download
 	wget \
-		"https://bitcoin.org/bin/bitcoin-core-${BITCOIND_VERSION}/bitcoin-${BITCOIND_VERSION}-linux64.tar.gz" \
+		"https://bitcoin.org/bin/bitcoin-core-${BITCOIND_VERSION}/bitcoin-${BITCOIND_VERSION}-x86_64-linux-gnu.tar.gz" \
 		--output-document="bitcoind.tar.gz"; \
 
 	# install
