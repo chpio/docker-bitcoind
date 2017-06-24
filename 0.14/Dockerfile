@@ -3,7 +3,7 @@ FROM chpio/gosu:jessie
 RUN { \
 	set -ex; \
 
-	BITCOIND_VERSION="0.14.1"; \
+	BITCOIND_VERSION="0.14.2"; \
 
 	# add user & group
 	groupadd --system --gid 1000 bitcoind; \
