@@ -14,14 +14,20 @@ RUN { \
 	apt-get install --no-install-recommends -y $BUILD_DEPS; \
 
 	# download
+	mkdir /tmp/bitcoind; \
+	cd /tmp/bitcoind; \
 	wget \
+		--quiet \
+		--output-document="-" \
 		"https://bitcoin.org/bin/bitcoin-core-${BITCOIND_VERSION}/bitcoin-${BITCOIND_VERSION}-x86_64-linux-gnu.tar.gz" \
-		--output-document="bitcoind.tar.gz"; \
+	| tar \
+		--extract \
+		--gzip \
+		--strip-components="1"; \
 
 	# install
-	tar -xzf bitcoind.tar.gz; \
-	mv bitcoin-${BITCOIND_VERSION}/lib/* /usr/lib; \
-	mv bitcoin-${BITCOIND_VERSION}/bin/bitcoind /usr/bin; \
+	mv lib/* /usr/local/lib; \
+	mv bin/bitcoind /usr/local/bin; \
 
 	# clean up
 	apt-get purge -y $BUILD_DEPS; \
