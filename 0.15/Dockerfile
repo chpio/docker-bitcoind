@@ -3,7 +3,7 @@ FROM chpio/gosu:stretch
 RUN { \
 	set -ex; \
 
-	BITCOIND_VERSION="0.15.0.1"; \
+	BITCOIND_VERSION="0.15.1"; \
 
 	# add user & group
 	groupadd --system --gid 1000 bitcoind; \
